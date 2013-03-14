@@ -127,6 +127,9 @@
 			// Create direct IO file handle with specified flags
 			$this->serial = dio_open($device, $flags);
 
+			// Set synchronous IO
+			dio_fcntl($this->serial, F_SETFL, O_SYNC);
+
 			// Set options default
 			$options = array(
 				"baud" => self::DEFAULT_BAUD,
