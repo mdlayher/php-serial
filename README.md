@@ -1,7 +1,13 @@
 serial
 ======
 
-PHP class utilizing Direct IO to interact with a RS232 serial port
+PHP class utilizing Direct IO to interact with a RS232 serial port.
+
+Installation
+========
+
+To install using Composer, add `"mdlayher/serial": "dev-master"` to the `require` section of your `composer.json`.
+
 
 Usage
 ====
