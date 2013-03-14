@@ -4,6 +4,8 @@
 	//
 	// changelog
 	//
+	// 3/14/13 MDL:
+	//	- bugfixes and optimizations
 	// 3/13/13 MDL:
 	//	- initial commit
 
@@ -15,6 +17,9 @@
 
 		// Default read/write length
 		const DEFAULT_LENGTH = 1024;
+
+		// Default wait time after write (in microseconds)
+		const DEFAULT_WAIT = 200000;
 
 		// Direct IO attribute defaults
 		const DEFAULT_BAUD = 9600;
@@ -143,19 +148,26 @@
 		// Close connection to serial port
 		public function close()
 		{
-			dio_close($this->serial);
+			if (isset($this->serial))
+			{
+				dio_close($this->serial);
+				unset($this->serial);
+			}
 			return true;
 		}
 
 		// Read data from serial port
 		public function read($length = self::DEFAULT_LENGTH)
 		{
-			return dio_read($this->serial, $length);
+			$bytes = dio_read($this->serial, $length);
+			return $bytes;
 		}
 
 		// Write data to serial port
-		public function write($data, $length = self::DEFAULT_LENGTH)
+		public function write($data, $length = self::DEFAULT_LENGTH, $wait = self::DEFAULT_WAIT)
 		{
-			return dio_write($this->serial, $data);
+			$bytes = dio_write($this->serial, $data);
+			usleep($wait);
+			return $bytes;
 		}
 	}
