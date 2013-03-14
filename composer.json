@@ -1,5 +1,6 @@
 {
 	"name": "mdlayher/obd",
+	"version": "0.0.1",
 	"description": "PHP class utilizing Direct IO to interact with a RS232 serial port",
 	"keywords": ["serial", "rs232"],
 	"homepage": "https://github.com/mdlayher/serial",
