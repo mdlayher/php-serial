@@ -118,6 +118,12 @@
 				throw new \Exception("Unable to set device for serial connection");
 			}
 
+			// Check if Direct IO extension installed
+			if (!function_exists("dio_open"))
+			{
+				throw new \Exception("PHP Direct IO is not installed, cannot open serial connection!");
+			}
+
 			// Create direct IO file handle with specified flags
 			$this->serial = dio_open($device, $flags);
 
